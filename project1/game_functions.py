@@ -48,6 +48,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
 	ship.blitme()
 	aliens.draw(screen)
 
+
 	pygame.display.flip()
 
 
@@ -76,7 +77,7 @@ def get_number_rows(ai_settings, ship_height, alien_height):
 
 
 def create_alien(ai_settings, screen, aliens, alien_number, row_number):
-	print("create alien")
+	# print("create alien")
 	alien = Alien(ai_settings, screen)
 	alien_width = alien.rect.width
 	alien.x = alien_width + 2 * alien_width * alien_number
@@ -84,10 +85,6 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
 	alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
 	aliens.add(alien)
 
-
-def update_aliens(ai_settings, aliens):
-	# check_fleet_edges(ai_settings, aliens)
-	aliens.update()
 
 def create_fleet(ai_settings, screen, ship, aliens):
 	alien = Alien(ai_settings, screen)
@@ -110,10 +107,12 @@ def check_fleet_edges(ai_settings, aliens):
 def change_fleet_direction(ai_settings, aliens):
 	for alien in aliens.sprites():
 		alien.rect.y += ai_settings.fleet_drop_speed
-
 	ai_settings.fleet_direction *= -1
 
 
+def update_aliens(ai_settings, aliens):
+	check_fleet_edges(ai_settings, aliens)
+	aliens.update()
 
 
 
